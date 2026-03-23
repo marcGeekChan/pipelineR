@@ -2,3 +2,4 @@
 ^renv\.lock$
 ^pipelineR\.Rproj$
 ^\.Rproj\.user$
+^/dev$
