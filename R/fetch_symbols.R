@@ -7,7 +7,7 @@
 
 fetch_symbols <- function() {
   con <- connect_db()
-  data <- DBI::dbGetQuery(con, "SELECT symbol FROM sp500.info")
+  data <- DBI::dbGetQuery(con, "SELECT index_ts,symbol FROM sp500.info")
   dbDisconnect(con)
   return(data)
 }
