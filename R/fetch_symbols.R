@@ -3,11 +3,8 @@
 #' @return List of symbols (class `"String"`)
 #' @export
 #'
-#' }
 
-fetch_symbols <- function() {
-  con <- connect_db()
+fetch_symbols <- function(con) {
   data <- DBI::dbGetQuery(con, "SELECT index_ts,symbol FROM sp500.info")
-  dbDisconnect(con)
   return(data)
 }

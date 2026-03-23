@@ -2,7 +2,9 @@ library(testthat)
 library(DBI)
 
 test_that("fetch_symbols returns a data frame with a symbol column", {
-  result <- fetch_symbols()
+  con <- connect_db()
+  result <- fetch_symbols(con)
+  dbDisconnect(con)
 
   expect_type(result, "list")        # data.frame is a list underneath
   expect_s3_class(result, "data.frame")
