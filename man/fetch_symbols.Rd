@@ -4,7 +4,7 @@
 \alias{fetch_symbols}
 \title{Fetch symbols}
 \usage{
-fetch_symbols()
+fetch_symbols(con)
 }
 \value{
 List of symbols (class \code{"String"})
