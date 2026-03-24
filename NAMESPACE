@@ -2,5 +2,6 @@
 
 export(connect_db)
 export(fetch_symbols)
+export(format_data)
 export(split_batch)
 export(yahoo_query_data)
