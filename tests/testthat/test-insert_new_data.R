@@ -17,16 +17,7 @@ test_that("insert_new_data works with real Yahoo Finance data", {
   formatted_data <- format_data(raw_data)
 
   # Insert into the real schema table
-  inserted <- dbGetQuery(conn, paste0(
-    "SELECT COUNT(*) AS n FROM ", Sys.getenv("PG_SCHEMA"), ".data_sp500"
-  ))
-
   expect_message(insert_new_data(conn, symbols$index_ts, formatted_data), "rows processed")
-
-  inserted <- dbGetQuery(conn, paste0(
-    "SELECT COUNT(*) AS n FROM ", Sys.getenv("PG_SCHEMA"), ".data_sp500"
-  ))
-  print(inserted)
 
   # Optional: check at least some rows were inserted
   inserted <- dbGetQuery(conn, paste0(
