@@ -15,6 +15,9 @@ log_summary(summary_tbl, n_rows, status, symbols)
 
 \item{symbols}{List of symbols}
 }
+\value{
+summary table
+}
 \description{
 log_summary
 }

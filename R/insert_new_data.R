@@ -49,4 +49,5 @@ insert_new_data <- function(conn, index_ts, data) {
   dbClearResult(stmt)
 
   message(nrow(data), " rows processed for insertion into ", schema, ".", table_name)
+  return(data)
 }

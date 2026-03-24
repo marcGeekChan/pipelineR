@@ -32,6 +32,7 @@ build_summary_table <- function(user_login, batch_id, n_rows, symbols) {
     status    = status,
     symbol    = symbol_list,
     user_login = user_login,
+    n_rows = n_rows,
     batch_id   = batch_id
   )
 

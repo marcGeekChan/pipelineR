@@ -1,3 +1,6 @@
+library(dplyr)
+library(tidyr)
+
 #' format_data
 #'
 #' @param data Data
