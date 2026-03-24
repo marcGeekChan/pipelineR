@@ -28,7 +28,6 @@ build_summary_table <- function(user_login, batch_id, n_rows, symbols) {
 
   # Build tibble
   summary_tbl <- tibble(
-    timestamp = Sys.time(),
     message   = message,
     status    = status,
     symbol    = symbol_list,

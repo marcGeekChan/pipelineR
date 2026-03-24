@@ -17,10 +17,7 @@ test_that("build_summary_table returns correct tibble structure", {
   expect_s3_class(summary, "tbl_df")
 
   # Check column names
-  expect_equal(colnames(summary), c("timestamp", "message", "status", "symbol", "user_login", "batch_id"))
-
-  # Check timestamp is recent
-  expect_true(Sys.time() - summary$timestamp < 5)  # within 5 seconds
+  expect_equal(colnames(summary), c("message", "status", "symbol", "user_login", "batch_id"))
 
   # Check message logic
   expect_equal(summary$message, paste(n_rows, "rows processed for this batch"))
