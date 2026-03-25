@@ -2,17 +2,6 @@ library(testthat)
 library(dplyr)
 library(tidyr)
 
-# Example format_data function
-format_data <- function(data) {
-  data_long <- data %>%
-    pivot_longer(
-      cols = c(open, high, low, close, adjusted, volume),
-      names_to = "field",
-      values_to = "value"
-    )
-  return(data_long)
-}
-
 # Mock data to avoid querying Yahoo in tests
 mock_data <- tibble::tibble(
   date = as.Date("2023-01-01") + 0:1,
