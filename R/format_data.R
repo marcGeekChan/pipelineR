@@ -1,9 +1,9 @@
-#' @importFrom dplyr %>%
-#' @importFrom tidyr pivot_longer
 #'
 #' format_data
 #'
 #' @param data Data
+#' @import dplyr
+#' @import tidyr
 #'
 #' @returns data_long
 #' @export

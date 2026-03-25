@@ -1,9 +1,9 @@
-#' @importFrom DBI dbDisconnect
 #'
 #' start_pipeline
 #'
 #' @returns void
 #' @export
+#' @import DBI
 start_pipeline <- function (user, from, to, batch_size) {
   from_str <- as.character(from)
   to_str <- as.character(to)

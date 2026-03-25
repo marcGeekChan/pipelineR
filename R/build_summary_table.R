@@ -1,4 +1,3 @@
-#' @importFrom tibble tibble
 #'
 #' build_summary_table
 #'
@@ -9,6 +8,7 @@
 #'
 #' @returns summary table
 #' @export
+#' @import tibble
 #'
 build_summary_table <- function(user_login, batch_id, n_rows, symbols) {
   # Determine message based on number of rows processed

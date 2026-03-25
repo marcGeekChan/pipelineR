@@ -1,10 +1,11 @@
-#' @importFrom DBI SQL dbQuoteIdentifier dbSendStatement dbBind dbClearResult
 #'
 #' insert_new_data
 #'
 #' @param conn Connection
 #' @param data Data
 #' @param table_name Table name
+#'
+#' @import DBI
 #'
 #' @export
 #'

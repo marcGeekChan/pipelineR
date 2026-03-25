@@ -1,4 +1,3 @@
-#' @importFrom DBI SQL dbQuoteIdentifier dbSendStatement dbBind dbClearResult
 #'
 #' push_summary_table
 #'
@@ -6,6 +5,7 @@
 #' @param summary_tbl Summary Table
 #'
 #' @returns void
+#' @import DBI
 #' @export
 #'
 push_summary_table <- function(conn, summary_tbl) {
