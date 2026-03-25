@@ -6,6 +6,7 @@
 #' @param symbols List of symbols
 #'
 #' @returns summary table
+#' @importFrom tibble tibble
 #' @export
 #'
 log_summary <- function(summary_tbl, n_rows, status, symbols ) {

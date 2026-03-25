@@ -6,6 +6,7 @@
 #'
 #' @returns data
 #' @export
+#' @importFrom tidyquant tq_get
 #'
 yahoo_query_data <- function(ticker, start_date, end_date) {
 
