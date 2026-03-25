@@ -9,9 +9,9 @@ insert_new_data(conn, index_ts, data)
 \arguments{
 \item{conn}{Connection}
 
-\item{data}{Data}
+\item{index_ts}{index_ts}
 
-\item{table_name}{Table name}
+\item{data}{Data}
 }
 \description{
 insert_new_data

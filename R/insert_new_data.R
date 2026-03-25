@@ -2,8 +2,8 @@
 #' insert_new_data
 #'
 #' @param conn Connection
+#' @param index_ts index_ts
 #' @param data Data
-#' @param table_name Table name
 #'
 #' @import DBI
 #' @import RPostgres

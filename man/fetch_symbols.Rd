@@ -6,6 +6,9 @@
 \usage{
 fetch_symbols(con)
 }
+\arguments{
+\item{con}{Connection}
+}
 \value{
 List of symbols (class \code{"String"})
 }

@@ -2,6 +2,12 @@
 #' start_pipeline
 #'
 #' @returns void
+#'
+#' @param user user
+#' @param from from
+#' @param to to
+#' @param batch_size batch_size
+#'
 #' @export
 #' @import DBI
 start_pipeline <- function (user, from, to, batch_size) {

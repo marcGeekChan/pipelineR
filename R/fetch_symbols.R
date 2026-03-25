@@ -1,5 +1,7 @@
 #' Fetch symbols
 #'
+#' @param con Connection
+#'
 #' @return List of symbols (class `"String"`)
 #'
 #' @import DBI

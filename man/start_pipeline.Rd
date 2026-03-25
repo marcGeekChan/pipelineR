@@ -6,6 +6,15 @@
 \usage{
 start_pipeline(user, from, to, batch_size)
 }
+\arguments{
+\item{user}{user}
+
+\item{from}{from}
+
+\item{to}{to}
+
+\item{batch_size}{batch_size}
+}
 \value{
 void
 }
