@@ -1,6 +1,5 @@
 library(testthat)
 library(DBI)
-library(RPostgres)
 
 test_that("push_summary_table inserts rows correctly", {
   # Connect using environment variables
