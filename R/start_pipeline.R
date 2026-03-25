@@ -4,7 +4,7 @@ library(DBI)
 #'
 #' @returns void
 #' @export
-start_pipeline <- function (from, to, batch_size) {
+start_pipeline <- function (user, from, to, batch_size) {
   from_str <- as.character(from)
   to_str <- as.character(to)
 
@@ -15,7 +15,7 @@ start_pipeline <- function (from, to, batch_size) {
   for (batch_splitter in batch_splitted) {
 
     batch_symbols <- list()
-    summary_table <- build_summary_table('test_user', counter, 0, batch_symbols)
+    summary_table <- build_summary_table(user, counter, 0, batch_symbols)
 
     for (i in seq_len(nrow(batch_splitter))) {
 
