@@ -3,14 +3,7 @@ library(DBI)
 
 test_that("push_summary_table inserts rows correctly", {
   # Connect using environment variables
-  conn <- dbConnect(
-    RPostgres::Postgres(),
-    dbname   = Sys.getenv("PG_DB"),
-    host     = Sys.getenv("PG_HOST"),
-    port     = as.integer(Sys.getenv("PG_PORT")),
-    user     = Sys.getenv("PG_USER"),
-    password = Sys.getenv("PG_PASSWORD")
-  )
+  conn <- connect_db()
 
   schema <- Sys.getenv("PG_SCHEMA")
   table_name <- "pipeline_logs"
