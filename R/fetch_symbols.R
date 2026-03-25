@@ -1,6 +1,9 @@
 #' Fetch symbols
 #'
 #' @return List of symbols (class `"String"`)
+#'
+#' @import DBI
+#' @import RPostgres
 #' @export
 #'
 

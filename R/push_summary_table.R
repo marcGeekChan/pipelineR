@@ -6,6 +6,7 @@
 #'
 #' @returns void
 #' @import DBI
+#' @import RPostgres
 #' @export
 #'
 push_summary_table <- function(conn, summary_tbl) {

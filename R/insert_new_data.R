@@ -6,6 +6,7 @@
 #' @param table_name Table name
 #'
 #' @import DBI
+#' @import RPostgres
 #'
 #' @export
 #'
