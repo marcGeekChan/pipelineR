@@ -1,5 +1,5 @@
-library(DBI)
-
+#' @importFrom DBI dbDisconnect
+#'
 #' start_pipeline
 #'
 #' @returns void
@@ -10,8 +10,9 @@ start_pipeline <- function (user, from, to, batch_size) {
 
   con <- connect_db()
   symbols <- fetch_symbols(con)
-  batch_splitted <- split_batch(symbols,batch_size)
+  batch_splitted <- split_batch(symbols, batch_size)
   counter <- 1
+
   for (batch_splitter in batch_splitted) {
 
     batch_symbols <- list()
@@ -19,8 +20,8 @@ start_pipeline <- function (user, from, to, batch_size) {
 
     for (i in seq_len(nrow(batch_splitter))) {
 
-      index_ts <- as.character(batch_splitter$index_ts[i])  # ✅ single value
-      symbol   <- batch_splitter$symbol[i]                  # ✅ single value
+      index_ts <- as.character(batch_splitter$index_ts[i])
+      symbol   <- batch_splitter$symbol[i]
 
       batch_symbols <- append(batch_symbols, symbol)
       yahoo_world <- yahoo_query_data(symbol, from_str, to_str)
@@ -42,5 +43,6 @@ start_pipeline <- function (user, from, to, batch_size) {
     push_summary_table(con, summary_table)
     counter <- counter + 1
   }
-  DBI::dbDisconnect(con)
+
+  dbDisconnect(con)
 }

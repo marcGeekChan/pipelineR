@@ -1,6 +1,6 @@
-library(dplyr)
-library(tidyr)
-
+#' @importFrom dplyr %>%
+#' @importFrom tidyr pivot_longer
+#'
 #' format_data
 #'
 #' @param data Data

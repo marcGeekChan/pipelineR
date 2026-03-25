@@ -1,5 +1,5 @@
-library(DBI)
-
+#' @importFrom DBI SQL dbQuoteIdentifier dbSendStatement dbBind dbClearResult
+#'
 #' push_summary_table
 #'
 #' @param conn Connection
@@ -15,11 +15,10 @@ push_summary_table <- function(conn, summary_tbl) {
   schema <- Sys.getenv("PG_SCHEMA", "public")
 
   # Fully qualified table name
-  fq_table <- DBI::SQL(paste0(DBI::dbQuoteIdentifier(conn, schema), ".",
-                              DBI::dbQuoteIdentifier(conn, table_name)))
+  fq_table <- SQL(paste0(dbQuoteIdentifier(conn, schema), ".",
+                         dbQuoteIdentifier(conn, table_name)))
 
-  # Insert each row in summary_tbl into the log table
-  # Using parameterized queries to avoid SQL injection
+  # Insert query
   insert_query <- paste0(
     "INSERT INTO ", fq_table,
     " (message, status, symbol, user_login, batch_id) ",
