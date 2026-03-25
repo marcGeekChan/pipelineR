@@ -1,3 +1,5 @@
+library(DBI)
+
 #' start_pipeline
 #'
 #' @returns void
@@ -40,5 +42,5 @@ start_pipeline <- function (from, to, batch_size) {
     push_summary_table(con, summary_table)
     counter <- counter + 1
   }
-  dbDisconnect(con)
+  DBI::dbDisconnect(con)
 }
