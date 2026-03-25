@@ -1,52 +1,52 @@
 library(testthat)
-library(dplyr)
-library(tibble)
+library(DBI)
+library(RPostgres)
 
-test_that("build_summary_table returns correct tibble structure", {
-  user <- "alice"
-  batch <- 1
-  n_rows <- 5
-  symbols <- c("AAPL", "MSFT", "NIN")
+test_that("push_summary_table inserts rows correctly", {
+  # Connect using environment variables
+  conn <- dbConnect(
+    RPostgres::Postgres(),
+    dbname   = Sys.getenv("PG_DB"),
+    host     = Sys.getenv("PG_HOST"),
+    port     = as.integer(Sys.getenv("PG_PORT")),
+    user     = Sys.getenv("PG_USER"),
+    password = Sys.getenv("PG_PASSWORD")
+  )
 
-  summary <- build_summary_table(user_login = user,
-                                 batch_id = batch,
-                                 n_rows = n_rows,
-                                 symbols = symbols)
+  schema <- Sys.getenv("PG_SCHEMA")
+  table_name <- "pipeline_logs"
 
-  # Check that result is a tibble
-  expect_s3_class(summary, "tbl_df")
+  # Sample data
+  summary_tbl <- data.frame(
+    message    = c("Test 1", "Test 2"),
+    status     = c("OK", "FAIL"),
+    symbol     = c("AAPL", "GOOG"),
+    user_login = c("tester", "tester2"),
+    batch_id   = c(101, 102),
+    stringsAsFactors = FALSE
+  )
 
-  # Check column names
-  expect_equal(colnames(summary), c("message", "status", "symbol", "user_login", "n_rows", "batch_id"))
+  # Expect message output
+  expect_message(push_summary_table(conn, summary_tbl),
+                 "Logged 2 batch\\(es\\) into")
 
-  # Check message logic
-  expect_equal(summary$message, paste(n_rows, "rows processed for this batch"))
+  # Verify inserted data
+  result <- dbGetQuery(conn, paste0(
+    "SELECT * FROM ", schema, ".", table_name, " ORDER BY batch_id;"
+  ))
 
-  # Check status is always "err" (current function logic)
-  expect_equal(summary$status, "err")
+  expect_equal(nrow(result), nrow(summary_tbl))
+  expect_equal(result$message, summary_tbl$message)
+  expect_equal(result$status, summary_tbl$status)
+  expect_equal(result$symbol, summary_tbl$symbol)
+  expect_equal(result$user_login, summary_tbl$user_login)
+  expect_equal(result$batch_id, summary_tbl$batch_id)
 
-  # Check symbols collapsed correctly
-  expect_equal(summary$symbol, "AAPL, MSFT, NIN")
+  # Optional: clean up rows inserted in this test
+  dbExecute(conn, paste0(
+    "DELETE FROM ", schema, ".", table_name,
+    " WHERE batch_id IN (", paste(summary_tbl$batch_id, collapse = ","), ");"
+  ))
 
-  # Check user_login and batch_id
-  expect_equal(summary$user_login, user)
-  expect_equal(summary$batch_id, batch)
-})
-
-test_that("build_summary_table handles zero rows correctly", {
-  user <- "bob"
-  batch <- 2
-  n_rows <- 0
-  symbols <- c("GOOG")
-
-  summary <- build_summary_table(user_login = user,
-                                 batch_id = batch,
-                                 n_rows = n_rows,
-                                 symbols = symbols)
-
-  expect_equal(summary$message, "No new rows to insert")
-  expect_equal(summary$status, "err")
-  expect_equal(summary$symbol, "GOOG")
-  expect_equal(summary$user_login, user)
-  expect_equal(summary$batch_id, batch)
+  dbDisconnect(conn)
 })
