@@ -7,7 +7,6 @@
 #' @export
 #'
 split_batch <- function(data, batch_size) {
-  batches <- split(data, ceiling(seq_along(data) / batch_size))
-
-  return(batches)
+  data <- as.data.frame(data)  # force safety
+  split(data, ceiling(seq_len(nrow(data)) / batch_size))
 }

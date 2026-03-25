@@ -17,7 +17,7 @@ test_that("build_summary_table returns correct tibble structure", {
   expect_s3_class(summary, "tbl_df")
 
   # Check column names
-  expect_equal(colnames(summary), c("message", "status", "symbol", "user_login", "batch_id"))
+  expect_equal(colnames(summary), c("message", "status", "symbol",  "user_login","n_rows", "batch_id"))
 
   # Check message logic
   expect_equal(summary$message, paste(n_rows, "rows processed for this batch"))
